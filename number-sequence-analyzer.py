@@ -47,80 +47,56 @@ def collatz_seq(collatz):
     numb_a1 = 0
     while collatz > 1:
         if collatz % 2 == 0:
-            collatz = collatz / 2
+            collatz = int(collatz / 2)
             numb_a1 += 1
-            print(numb_a1,"1")
+            print(numb_a1,"1", collatz)
         else:
             collatz = collatz * 3 + 1
             numb_a1 += 1        
-            print(numb_a1,"2")
-    return numb_a1
+            print(numb_a1,"2", collatz)
 
 
-keyboard.add_hotkey('ctrl+shift', lambda: print('Hotkey Triggered! EXITING!'))
+
 
 going = True
 
 while going == True:
-    choices_print= ["Please Select a Letter Key That Coralates to go to The Math Calculation!", "A: Fibonacci Sequence", "S: Prime Number Check", "D: Prime Number Range", "F: Multiplication Table", "G: Factorial", "H: Collatz Sequence", "Ctrl + Shift: Exit"]
+    choices_print= ["Please Select a Letter Key That Coralates to go to The Math Calculation!", "A: Fibonacci Sequence", "S: Prime Number Check", "D: Prime Number Range", "F: Multiplication Table", "G: Factorial", "H: Collatz Sequence", "STOP: Exit app"]
     selection_print = print(choices_print)
-    key = keyboard.read_key()
-    hotkey = keyboard.read_hotkey()
+    key = input("Input a key: ")
 
-    if key == 'a':  
+    if key == 'a' or key == 'A':  
         print("Number must be a integer")
         inputsmthn = int(input("How many times?: "))
-        numbers_only = "".join([char for char in inputsmthn if char.isdigit()])
-        fibonacci(numbers_only)
+        fibonacci(inputsmthn)
 
-    elif key == 's':
+    elif key == 's' or key == 'S':
         print("Number must be a integer")
         inputsmthn = int(input("What Number?: "))
-        numbers_only = "".join([char for char in inputsmthn if char.isdigit()])
-        print(prime_num_chk(numbers_only))
+        print(prime_num_chk(inputsmthn))
                 
-    elif key == 'd':
+    elif key == 'd' or key == 'D':
         print("Numbers in range must be integers")
         inputsmthn1 = int(input("Starting Number: "))
-        numbers_only1 = "".join([char for char in inputsmthn1 if char.isdigit()])
         inputsmthn2 = int(input("Ending Number: "))
-        numbers_only2 = "".join([char for char in inputsmthn2 if char.isdigit()])
-        print(prime_num_rng(numbers_only1, numbers_only2))
+        print(prime_num_rng(inputsmthn1, inputsmthn2))
     
-    elif key == 'f':
+    elif key == 'f' or key == 'F':
         print("The two numbers for the multiplaction table must be integers")
         inputsmthn1 = int(input("Number Base: "))
-        numbers_only1 = "".join([char for char in inputsmthn1 if char.isdigit()])
         inputsmthn2 = int(input("Number Legnth: "))
-        numbers_only2 = "".join([char for char in inputsmthn2 if char.isdigit()])
-        mult_table(numbers_only1, numbers_only2)
+        mult_table(inputsmthn1, inputsmthn2)
 
-    elif key == 'g':
+    elif key == 'g' or key == 'G':
         print("Number must be integer")
         inputsmthn = int(input("Factorial Size?: "))
-        numbers_only = "".join([char for char in inputsmthn if char.isdigit()])
-        print(factorial(numbers_only))
+        print(factorial(inputsmthn))
 
-    elif key == 'h':
+    elif key == 'h' or key == 'H':
         print("Number must be integer")
         inputsmthn = int(input("Choose a Number: "))
-        numbers_only = "".join([char for char in inputsmthn if char.isdigit()])
+        collatz_seq(inputsmthn)
 
-    elif hotkey == 'ctrl+shift':
+    elif key == 'STOP':
         going = False
         sys.exit(0)
-
-
-
-
-
-
-
-#inputfib1 = int(input('string'))
-#inputfib2 = int(input('string'))
-#fibonacci(inputfib1)
-#print(prime_num_chk(inputfib))
-#print(prime_num_rng(inputfib1, inputfib2))
-#mult_table(inputfib1, inputfib2)
-#print(factorial(inputfib1))
-#print(collatz_seq(inputfib1))
