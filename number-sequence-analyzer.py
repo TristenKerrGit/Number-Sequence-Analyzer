@@ -1,35 +1,126 @@
-import tkinter as tk
-import copy
-
-def fibonacci()
+import keyboard
+import sys
 
 
 
+def fibonacci(fibmath):
+    numb1 = [0,0,1]
+    for useless_variable in range(fibmath+1):
+        numb1.append(numb1[-1]+numb1[-2])
+    print(numb1)
+
+def prime_num_chk(primechk):
+    prime = True
+    if primechk not in (-1,0,1) and primechk > 0:
+        for numb3 in range(2,int(primechk)):
+            if (primechk/numb3)%1 == 0:
+                prime = False
+    else:
+        prime = False
+    return prime
+
+def prime_num_rng(start, end):
+    primes = []
+    is_prime = False
+    for numb in range(start, end):
+        is_prime = prime_num_chk(numb)
+        if is_prime == True:
+            primes.append(numb)
+        is_prime = False
+    return primes
+
+def mult_table(base, length):
+    for numb in range(1,length + 1):
+        print(f'{base}*{numb}={base * numb}')
+
+def factorial(factor):
+    if factor <= 0:
+        return 1
+    for fact in range(1, factor):
+        if fact <= 2:
+            facts = factor * fact
+        else:
+            facts = facts * fact
+    return facts
+
+def collatz_seq(collatz):
+    numb_a1 = 0
+    while collatz > 1:
+        if collatz % 2 == 0:
+            collatz = collatz / 2
+            numb_a1 += 1
+            print(numb_a1,"1")
+        else:
+            collatz = collatz * 3 + 1
+            numb_a1 += 1        
+            print(numb_a1,"2")
+    return numb_a1
+
+
+keyboard.add_hotkey('ctrl+shift', lambda: print('Hotkey Triggered! EXITING!'))
+
+going = True
+
+while going == True:
+    choices_print= ["Please Select a Letter Key That Coralates to go to The Math Calculation!", "A: Fibonacci Sequence", "S: Prime Number Check", "D: Prime Number Range", "F: Multiplication Table", "G: Factorial", "H: Collatz Sequence", "Ctrl + Shift: Exit"]
+    selection_print = print(choices_print)
+    key = keyboard.read_key()
+    hotkey = keyboard.read_hotkey()
+
+    if key == 'a':  
+        print("Number must be a integer")
+        inputsmthn = int(input("How many times?: "))
+        numbers_only = "".join([char for char in inputsmthn if char.isdigit()])
+        fibonacci(numbers_only)
+
+    elif key == 's':
+        print("Number must be a integer")
+        inputsmthn = int(input("What Number?: "))
+        numbers_only = "".join([char for char in inputsmthn if char.isdigit()])
+        print(prime_num_chk(numbers_only))
+                
+    elif key == 'd':
+        print("Numbers in range must be integers")
+        inputsmthn1 = int(input("Starting Number: "))
+        numbers_only1 = "".join([char for char in inputsmthn1 if char.isdigit()])
+        inputsmthn2 = int(input("Ending Number: "))
+        numbers_only2 = "".join([char for char in inputsmthn2 if char.isdigit()])
+        print(prime_num_rng(numbers_only1, numbers_only2))
+    
+    elif key == 'f':
+        print("The two numbers for the multiplaction table must be integers")
+        inputsmthn1 = int(input("Number Base: "))
+        numbers_only1 = "".join([char for char in inputsmthn1 if char.isdigit()])
+        inputsmthn2 = int(input("Number Legnth: "))
+        numbers_only2 = "".join([char for char in inputsmthn2 if char.isdigit()])
+        mult_table(numbers_only1, numbers_only2)
+
+    elif key == 'g':
+        print("Number must be integer")
+        inputsmthn = int(input("Factorial Size?: "))
+        numbers_only = "".join([char for char in inputsmthn if char.isdigit()])
+        print(factorial(numbers_only))
+
+    elif key == 'h':
+        print("Number must be integer")
+        inputsmthn = int(input("Choose a Number: "))
+        numbers_only = "".join([char for char in inputsmthn if char.isdigit()])
+
+    elif hotkey == 'ctrl+shift':
+        going = False
+        sys.exit(0)
 
 
 
 
 
-root = tk.Tk()
-root.title("Number Sequence Analyzer")
-
-title_card = tk.Frame(root)
-title_card.grid(row=0, column=0)
 
 
-exit_only = tk.Frame(root)
-exit_only.grid(row=10, column=0)
-
-
-
-def on_click():
-    root.destroy()
-
-
-lbl = tk.Label(title_card, text="<< Number Sequence Analyzer >>")
-lbl.grid(row=0, column=0)
-
-btn = tk.Button(exit_only, text="QUIT APP", command=on_click)
-btn.grid(row=0, column=0)
-
-root.mainloop()
+#inputfib1 = int(input('string'))
+#inputfib2 = int(input('string'))
+#fibonacci(inputfib1)
+#print(prime_num_chk(inputfib))
+#print(prime_num_rng(inputfib1, inputfib2))
+#mult_table(inputfib1, inputfib2)
+#print(factorial(inputfib1))
+#print(collatz_seq(inputfib1))
